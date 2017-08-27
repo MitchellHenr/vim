@@ -1,0 +1,6 @@
+execute ":normal A# filename:      \e\"%p"
+execute ":normal A\r# author:        Henry Mitchell"
+execute ":normal A\r# creation date: \e:put =strftime('%d %b %Y')\ri\b"
+execute ":normal o\r# description:   \r"
+execute ":normal oimport matplotlib.pyplot as plt"
+execute ":normal oimport numpy as np\e3kA"
