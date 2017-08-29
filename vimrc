@@ -8,16 +8,9 @@ call vundle#begin()
 " Vundle itself
 Plugin 'VundleVim/Vundle.vim'
 
-" Org mode ---------------------------------------- {{{
-Plugin 'jceb/vim-orgmode'
-Plugin 'tpope/vim-speeddating'
-Plugin 'vim-scripts/utl.vim'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/Tagbar'
-Plugin 'mattn/calendar-vim'
-" }}}
-
 " Others ----------------------------------------- {{{
+Plugin 'chrisbra/csv.vim' " --------------------------------------------------- CSV filetype
+Plugin 'dhruvasagar/vim-dotoo' " ---------------------------------------------- Todo manager
 Plugin 'KeitaNakamura/neodark.vim' " ------------------------------------------ Color scheme
 Plugin 'airblade/vim-gitgutter' " --------------------------------------------- Git
 Plugin 'darfink/vim-plist' " -------------------------------------------------- Editing plists
@@ -34,7 +27,7 @@ Plugin 'sjl/gundo.vim' " ------------------------------------------------------ 
 Plugin 'skalnik/vim-vroom' " -------------------------------------------------- Ruby testing
 Plugin 'tpope/vim-commentary' " ----------------------------------------------- Easy commenting
 Plugin 'tpope/vim-endwise' " -------------------------------------------------- Automatically close Ruby blocks
-Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive' " ------------------------------------------------- Git
 Plugin 'tpope/vim-surround' " ------------------------------------------------- Adding delimiters easily
 Plugin 'vim-latex/vim-latex' " ------------------------------------------------ LaTeX support
 " }}}
@@ -107,7 +100,7 @@ let g:tex_flavor='latex'
 
 " Keybindings and custom commands ----------------------------- {{{
 " Easier un-highlighting
-nnoremap <leader><space> :nohlsearch <enter>
+nnoremap <leader><space> :nohlsearch<enter>
 " Make moving between panes easier
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -150,8 +143,6 @@ augroup tex_group
     autocmd Filetype tex :let b:AutoPairs={"{": "}", "(": ")", "$": "$"}
     " Set special characters
     autocmd BufNewFile,BufRead *.tex setlocal iskeyword+=:,_,.
-    " Only show current paragraph
-    autocmd Filetype tex :Limelight
 augroup END
 " }}}
 "
@@ -176,5 +167,5 @@ augroup END
 " }}}
 
 " Org things ------------------------- {{{
-let g:org_agenda_files=['~/Todo/school/PHYS211.org', '~/Todo/school/MATH266.org']
+let g:dotoo#agenda#files=['/Users/hmmitche/Todo/school/*']
 " }}}
