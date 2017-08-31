@@ -169,3 +169,10 @@ augroup END
 " Org things ------------------------- {{{
 let g:dotoo#agenda#files=['/Users/hmmitche/Todo/school/*']
 " }}}
+
+" Cron things ----------------------------- {{{
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
+" }}}
