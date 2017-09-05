@@ -126,6 +126,8 @@ augroup py_group
     " Indentation things
     autocmd BufNewFile,BufRead *.py :setlocal foldmethod=indent
                 \ tabstop=4
+    " Delete trailing whitespace
+    autocmd BufWritePre *.py %s/\s\+$//e
 augroup END
 " }}}
 "
@@ -135,6 +137,8 @@ augroup tex_group
     " Corrects indentation on all lines,
     " returns cursor to original position
     autocmd BufWritePre *.tex :execute "normal! mqHmtgg=G'tzt`q"
+    " Delete trailing whitespace
+    autocmd BufWritePre *.tex %s/\s\+$//e
     " Makes folding work
     autocmd Filetype tex :set foldmethod=expr
     " Spell check on
