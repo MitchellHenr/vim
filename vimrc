@@ -79,6 +79,18 @@ set writebackup " ------------------------------------------------------------- 
 syntax on
 " }}}
 
+" Functions ------------------------------------------------- {{{
+" To remove trailing whitespace
+function! StripTrailingWhitespace()
+    " Save cursor position
+    let l:save = winsaveview()
+    " Remove trailing whitespace
+    %s/\s\+$//e
+    " Move cursor to original position
+    call winrestview(l:save)
+endfunction
+" }}}
+
 " Syntax checking ---------------------------- {{{
 let g:syntastic_python_checkers=["flake8"]
 " }}}
@@ -127,7 +139,7 @@ augroup py_group
     autocmd BufNewFile,BufRead *.py :setlocal foldmethod=indent
                 \ tabstop=4
     " Delete trailing whitespace
-    autocmd BufWritePre *.py %s/\s\+$//e
+    autocmd BufWritePre *.py call StripTrailingWhitespace()
 augroup END
 " }}}
 "
@@ -136,9 +148,9 @@ augroup tex_group
     autocmd!
     " Corrects indentation on all lines,
     " returns cursor to original position
-    autocmd BufWritePre *.tex :execute "normal! mqHmtgg=G'tzt`q"
-    " Delete trailing whitespace
-    autocmd BufWritePre *.tex %s/\s\+$//e
+    autocmd BufWritePre *.tex execute "normal! mqHmtgg=G'tzt`q"
+    " Strips trailing whitespace
+    autocmd BufWritePre *.tex call StripTrailingWhitespace()
     " Makes folding work
     autocmd Filetype tex :set foldmethod=expr
     " Spell check on
