@@ -17,3 +17,5 @@ call IMAP('ihat',"\\vb{\\hat{i}}", 'tex' )
 call IMAP('jhat',"\\vb{\\hat{j}}", 'tex' )
 call IMAP('khat',"\\vb{\\hat{k}}", 'tex' )
 call IMAP('`|', "\\vmqty{\n<++>\n}", 'tex')
+" Improve folding
+let g:Tex_FoldedEnvironments.=',IEEE'

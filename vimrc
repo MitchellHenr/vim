@@ -107,7 +107,7 @@ endif
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_TreatMacViewerAsUNIX=1
 let g:Tex_ViewRule_pdf='open'
-let g:tex_flavor='latex'
+let g:Tex_Flavor='latex'
 " }}}
 
 " Keybindings and custom commands ----------------------------- {{{
@@ -153,6 +153,8 @@ augroup tex_group
     autocmd BufWritePre *.tex call StripTrailingWhitespace()
     " Makes folding work
     autocmd Filetype tex :set foldmethod=expr
+    autocmd BufWritePre,BufRead *.tex call MakeTexFolds(0, 0)
+    " autocmd Filetype tex :set foldexpr=
     " Spell check on
     autocmd Filetype tex :setlocal spell spelllang=en_us
     " Allow for special mappings
