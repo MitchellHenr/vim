@@ -93,6 +93,7 @@ endfunction
 
 " Syntax checking ---------------------------- {{{
 let g:syntastic_python_checkers=["flake8"]
+let g:syntastic_tex_checkers=["lacheck"]
 " }}}
 
 " Git things ------------------------------------- {{{
@@ -153,7 +154,7 @@ augroup tex_group
     autocmd BufWritePre *.tex call StripTrailingWhitespace()
     " Makes folding work
     autocmd Filetype tex :set foldmethod=expr
-    autocmd BufWritePre,BufRead *.tex call MakeTexFolds(0, 0)
+    autocmd BufWritePre,BufRead *.tex execute "normal! :mkview<cr><leader>rf:loadview"
     " autocmd Filetype tex :set foldexpr=
     " Spell check on
     autocmd Filetype tex :setlocal spell spelllang=en_us shiftwidth=2
