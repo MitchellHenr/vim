@@ -52,6 +52,7 @@ set hlsearch " ---------------------------------------------------------------- 
 set incsearch " --------------------------------------------------------------- Do incremental search
 set laststatus=2 " ------------------------------------------------------------ When to show the statusline (always)
 set lazyredraw " -------------------------------------------------------------- Don't redraw while executing non-typed commands
+set nowildignorecase " -------------------------------------------------------- Case-sensitive commands
 set number " ------------------------------------------------------------------ Shows line number
 set path+=.,** " -------------------------------------------------------------- Allow :find to go recursively down the directory tree
 set relativenumber " ---------------------------------------------------------- Relative line numbers
@@ -60,11 +61,13 @@ set scrolloff=3 " ------------------------------------------------------------- 
 set shiftwidth=4 " ------------------------------------------------------------ Indent size
 set showcmd " ----------------------------------------------------------------- Show the things I'm typing in normal mode
 set showmode " ---------------------------------------------------------------- Show the mode I'm in
+set spell " ------------------------------------------------------------------- Turn on spell checking
 set splitbelow " -------------------------------------------------------------- Automatically open new splits below the current one
 set splitright " -------------------------------------------------------------- Automatically open new splits to the right of the current one
 set statusline=\ %t\ %m\ %{fugitive#statusline()}%=col:\ %c\ (%l/%L)\  " ------ Set my statusline
 set synmaxcol=3000 " ---------------------------------------------------------- Maximum column to do syntax highlighting
 set tabstop=4 " --------------------------------------------------------------- Number of spaces a tab gets converted to
+set textwidth=0 " ------------------------------------------------------------- Turn off automatic line wrapping
 set ttyfast " ----------------------------------------------------------------- Redraws quickly
 set undodir=$HOME/.vim/files/undo/ " ------------------------------------------ Sets the directory for undo files
 set updatecount=100 " --------------------------------------------------------- Write a swapfile after this many characters are written
@@ -94,6 +97,7 @@ endfunction
 " Syntax checking ---------------------------- {{{
 let g:syntastic_python_checkers=["flake8"]
 let g:syntastic_tex_checkers=["lacheck"]
+let g:syntastic_rst_sphinx_checker=["sphinx"]
 " }}}
 
 " Git things ------------------------------------- {{{
@@ -123,9 +127,16 @@ nnoremap <c-l> <c-w>l
 " More reasonable yanking
 nnoremap Y y$
 
+" Remap - to underline the current line
+nnoremap - yyp:s/./-/g<cr>:nohlsearch<cr>k
+
 " Because you keep holding shift down for too long
 if exists(":W")==0
     command W w
+endif
+
+if exists(":E")==0
+    command E e
 endif
 " }}}
 
@@ -178,11 +189,23 @@ augroup rb_group
     " Add header
     autocmd BufNewFile *.rb :execute ":normal! :source ~/.vim/snippets/ruby/setup.vim\r"
     " Get folding set up
-    autocmd BufNewFile,Bufread *.rb :setlocal foldmethod=syntax
+    autocmd BufNewFile,BufRead *.rb :setlocal foldmethod=syntax
     " Correct indentation
     autocmd BufWritePre *.rb :execute "normal! mqHmtgg=G'tzt`q"
 augroup END
 " }}}
+
+" Things to do on opening reStructuredText files ---------------{{{
+augroup rst_group
+    autocmd!
+    " Proper indenting
+    autocmd BufNewFile,BufRead *.rst :setlocal shiftwidth=3
+                \ tabstop=3
+    " Make $ be math
+    autocmd BufNewFile,BufRead *.rst :inoremap <buffer> $ :math:``<esc>i
+augroup END
+" }}}
+
 " }}}
 
 " Org things ------------------------- {{{
