@@ -10,7 +10,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Others ----------------------------------------- {{{
 Plugin 'chrisbra/csv.vim' " --------------------------------------------------- CSV filetype
-Plugin 'dhruvasagar/vim-dotoo' " ---------------------------------------------- Todo manager
 Plugin 'KeitaNakamura/neodark.vim' " ------------------------------------------ Color scheme
 Plugin 'airblade/vim-gitgutter' " --------------------------------------------- Git
 Plugin 'darfink/vim-plist' " -------------------------------------------------- Editing plists
@@ -46,7 +45,9 @@ set backupext=-vimbackup " ---------------------------------------------------- 
 set backupskip= " ------------------------------------------------------------- List of file patterns to skip backups for
 set cursorline " -------------------------------------------------------------- Highlight the line with the cursor on it
 set directory=$HOME/.vim/files/swap/ " ---------------------------------------- Location(s) for the swap files
+set diffopt+=vertical " ------------------------------------------------------- Open diffs with vertical splits
 set expandtab " --------------------------------------------------------------- Turn tabs into spaces
+set guioptions-=rL " ---------------------------------------------------------- Remove scrollbars
 set hidden " ------------------------------------------------------------------ Easier buffer switching
 set hlsearch " ---------------------------------------------------------------- Highlight search resuts
 set incsearch " --------------------------------------------------------------- Do incremental search
@@ -127,6 +128,9 @@ nnoremap Y y$
 if exists(":W")==0
     command W w
 endif
+if exists(":E")==0
+    command E e
+endif
 " }}}
 
 " File-specific autocommands ---------------------------------{{{
@@ -183,10 +187,6 @@ augroup rb_group
     autocmd BufWritePre *.rb :execute "normal! mqHmtgg=G'tzt`q"
 augroup END
 " }}}
-" }}}
-
-" Org things ------------------------- {{{
-let g:dotoo#agenda#files=['/Users/hmmitche/Todo/school/*']
 " }}}
 
 " Cron things ----------------------------- {{{
