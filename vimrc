@@ -9,9 +9,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Others ----------------------------------------- {{{
-Plugin 'chrisbra/csv.vim' " --------------------------------------------------- CSV filetype
 Plugin 'KeitaNakamura/neodark.vim' " ------------------------------------------ Color scheme
 Plugin 'airblade/vim-gitgutter' " --------------------------------------------- Git
+Plugin 'chrisbra/csv.vim' " --------------------------------------------------- CSV filetype
 Plugin 'darfink/vim-plist' " -------------------------------------------------- Editing plists
 Plugin 'easymotion/vim-easymotion' " ------------------------------------------ Easier movement
 Plugin 'fholgado/minibufexpl.vim' " ------------------------------------------- Minibuffer
