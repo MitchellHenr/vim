@@ -28,6 +28,7 @@ Plugin 'tpope/vim-endwise' " -------------------------------------------------- 
 Plugin 'tpope/vim-fugitive' " ------------------------------------------------- Git
 Plugin 'tpope/vim-surround' " ------------------------------------------------- Adding delimiters easily
 Plugin 'vim-latex/vim-latex' " ------------------------------------------------ LaTeX support
+Plugin 'neoclide/coc.nvim' " --------------------------------------------------- Intellisense
 " }}}
 
 call vundle#end()
@@ -44,7 +45,6 @@ set backupext=-vimbackup " ---------------------------------------------------- 
 set backupskip= " ------------------------------------------------------------- List of file patterns to skip backups for
 set cursorline " -------------------------------------------------------------- Highlight the line with the cursor on it
 set directory=$HOME/.vim/files/swap/ " ---------------------------------------- Location(s) for the swap files
-set diffopt+=vertical " ------------------------------------------------------- Open diffs with vertical splits
 set expandtab " --------------------------------------------------------------- Turn tabs into spaces
 set guioptions-=rL " ---------------------------------------------------------- Remove scrollbars
 set hidden " ------------------------------------------------------------------ Easier buffer switching
@@ -131,11 +131,11 @@ nnoremap Y y$
 nnoremap - yyp:s/./-/g<cr>:nohlsearch<cr>k
 
 " Because you keep holding shift down for too long
-if exists(":W")==0
+if !exists(":W")
     command W w
 endif
 
-if exists(":E")==0
+if !exists(":E")
     command E e
 endif
 " }}}
@@ -213,4 +213,13 @@ if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
 endif
+" }}}
+
+" Mac things ------------------------------ {{{
+if has('mac') && has('gui_running')
+
+  set macligatures
+
+  set guifont=FiraCode-Retina
+ endif
 " }}}
